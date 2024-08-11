@@ -29,15 +29,12 @@ export const getFiles = async (dirPath, ignore) => {
         if (ignore.path.includes(fullPath)) continue;
         if (ignore["file-name"].includes(dirent.name)) continue;
 
-        // const fileHash = await getHashReadStream(fullPath);
-        // if (ignore.hash.includes(fileHash)) continue;
-
         const fileData = {
           name: dirent.name,
           path: fullPath,
           abstractPath: abstractPath !== "" ? `\\${abstractPath}` : ".",
           size: fileStat.size,
-          hash: /*fileHash*/ "",
+          hash: "",
         };
 
         driveRes.push(fileData);
@@ -47,5 +44,11 @@ export const getFiles = async (dirPath, ignore) => {
 
   await getHash(driveRes)
 
-  return driveRes;
+  const driveResNew = []
+  for (let i = 0; i < driveRes.length; i++) {
+    if (ignore.hash.includes(driveRes[i].hash)) continue
+    driveResNew.push(driveRes[i])
+  }
+
+  return driveResNew;
 };
