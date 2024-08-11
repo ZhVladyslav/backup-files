@@ -1,7 +1,7 @@
 import axios from "axios";
 import { exec } from "child_process";
 
-export const startApi = () => {
+export const startApiReq = () => {
   exec("api.exe", (err, stdout, stderr) => {
     if (err) {
       console.error(err);
@@ -10,7 +10,7 @@ export const startApi = () => {
   });
 };
 
-export const stopApi = () => {
+export const stopApiReq = () => {
   axios({
     url: "http://127.0.0.1:3000/stop",
     method: "get",
