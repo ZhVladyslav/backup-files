@@ -1,0 +1,4 @@
+.idea
+node_modules
+backup-report.json
+ignore.json

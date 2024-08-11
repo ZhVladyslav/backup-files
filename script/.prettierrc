@@ -1,0 +1,17 @@
+{
+  "tabWidth": 2,
+  "printWidth": 80,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "semi": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "singleAttributePerLine": true,
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-multiline-arrays"
+  ]
+}
