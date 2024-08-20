@@ -32,7 +32,7 @@ export const main = async () => {
   const checkFiles = await sortFiles(filesFrom, filesInto);
 
   console.info("# Run backup ...");
-  // await runBackup(pathInto, checkFiles);
+  await runBackup(pathInto, checkFiles);
 
   console.info("# Saving report ...");
   await saveReport(checkFiles);
@@ -40,8 +40,8 @@ export const main = async () => {
   if (startOpts["remove-empty-dir"]) {
     console.info("# Start delete empty folders ...");
 
-    // await deleteEmptyFolders(pathFrom);
-    // await deleteEmptyFolders(pathInto);
+    await deleteEmptyFolders(pathFrom);
+    await deleteEmptyFolders(pathInto);
   }
 
   await stopServerReq();
