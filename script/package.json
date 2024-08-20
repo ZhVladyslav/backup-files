@@ -15,7 +15,12 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.11.1",
+    "@grpc/proto-loader": "^0.7.13",
+    "@types/google-protobuf": "^3.15.12",
     "axios": "^1.7.3",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4",
     "stdio": "^2.1.3"
   }
 }

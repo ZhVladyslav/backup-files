@@ -7,7 +7,7 @@ import { runBackup } from "./app/runBackup.js";
 import { saveReport } from "./utils/saveReport.js";
 import { getIgnoreFile } from "./utils/getIgnoreFile.js";
 import { durationDate, formatDate } from "./utils/formatDate.js";
-import { startApiReq, stopApiReq } from "./api/runApiReq.js";
+import { startServerReq, stopServerReq } from "./services/index.js";
 
 export const main = async () => {
   const startOpts = getOpts();
@@ -19,7 +19,7 @@ export const main = async () => {
     pathInto: startOpts.into,
   });
 
-  startApiReq();
+  await startServerReq();
 
   const startDate = new Date();
   console.info(`! Start: ${formatDate(startDate)}`);
@@ -32,7 +32,7 @@ export const main = async () => {
   const checkFiles = await sortFiles(filesFrom, filesInto);
 
   console.info("# Run backup ...");
-  await runBackup(pathInto, checkFiles);
+  // await runBackup(pathInto, checkFiles);
 
   console.info("# Saving report ...");
   await saveReport(checkFiles);
@@ -40,11 +40,11 @@ export const main = async () => {
   if (startOpts["remove-empty-dir"]) {
     console.info("# Start delete empty folders ...");
 
-    await deleteEmptyFolders(pathFrom);
-    await deleteEmptyFolders(pathInto);
+    // await deleteEmptyFolders(pathFrom);
+    // await deleteEmptyFolders(pathInto);
   }
 
-  stopApiReq();
+  await stopServerReq();
 
   console.info("");
   console.info("+ backup is done");

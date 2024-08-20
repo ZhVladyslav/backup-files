@@ -1,6 +1,6 @@
 import fsAsync from "node:fs/promises";
 import path from "path";
-import { getHash } from "./getHash.js";
+import { getHashReq } from "../services/index.js";
 
 export const getFiles = async (dirPath, ignore) => {
   const stack = [dirPath];
@@ -29,12 +29,14 @@ export const getFiles = async (dirPath, ignore) => {
         if (ignore.path.includes(fullPath)) continue;
         if (ignore["file-name"].includes(dirent.name)) continue;
 
+        const getHashRes = await getHashReq(fullPath)
+
         const fileData = {
           name: dirent.name,
           path: fullPath,
           abstractPath: abstractPath !== "" ? `\\${abstractPath}` : ".",
           size: fileStat.size,
-          hash: "",
+          hash: getHashRes.hash,
         };
 
         driveRes.push(fileData);
@@ -42,13 +44,5 @@ export const getFiles = async (dirPath, ignore) => {
     }
   }
 
-  await getHash(driveRes)
-
-  const driveResNew = []
-  for (let i = 0; i < driveRes.length; i++) {
-    if (ignore.hash.includes(driveRes[i].hash)) continue
-    driveResNew.push(driveRes[i])
-  }
-
-  return driveResNew;
+  return driveRes;
 };
