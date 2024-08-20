@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package review;
+
+option go_package = "./crypto";
+
+// GetHash
+message GetHashReq {
+  string path = 1;
+}
+
+message GetHashRes {
+  string path = 1;
+  string hash = 2;
+}
+
+// Stop
+message StopReq {
+  bool stop = 1;
+}
+
+message StopRes {
+  string msg = 1;
+}
+
+service Crypto {
+  rpc GetHash(GetHashReq) returns (GetHashRes);
+  rpc Stop(StopReq) returns (StopRes);
+}

@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func GetHash(path string) string {
+func GetFileHash(path string) string {
 	f, err := os.Open(path)
 	if err != nil {
 		log.Fatal(err)
